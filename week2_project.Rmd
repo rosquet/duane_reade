@@ -1,0 +1,27 @@
+---
+title: "Locations and Closing Times for Every Duane Reade Store in Manhattan"
+author: "Clay Glad"
+date: "16 September 2020"
+output:
+    html_document:
+            theme: cerulean
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo = FALSE, message = FALSE}
+library(data.table)
+library(leaflet)
+
+DR = fread("/home/clay/Skole/JHU_Data_Science/Developing_Data_Products/Week_2_project/duane_reade/duane_reade.csv")
+
+DR %>%
+        leaflet() %>%
+        addTiles() %>%
+        addMarkers(clusterOptions = markerClusterOptions(),
+                   popup = DR$locationTime)
+
+```
+
